@@ -18,12 +18,36 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(DIRECTORY), **kwargs)
 
+    def translate_path(self, path):
+        # Standard translation
+        translated = super().translate_path(path)
+
+        # If direct file/folder exists, serve it
+        if os.path.exists(translated):
+            return translated
+
+        # Clean query parameters and trailing slashes
+        clean_path = path.split("?")[0].rstrip("/")
+        if clean_path:
+            filename = clean_path.lstrip("/")
+            html_candidate = str(DIRECTORY / f"{filename}.html")
+            if os.path.exists(html_candidate):
+                return html_candidate
+
+        # Fallback to index.html for SPA routing
+        index_path = str(DIRECTORY / "index.html")
+        if os.path.exists(index_path):
+            return index_path
+
+        return translated
+
     def end_headers(self):
         # Disable caching for dev server
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         self.send_header("Pragma", "no-cache")
         self.send_header("Expires", "0")
         super().end_headers()
+
 
 
 def run_server(port=PORT):
