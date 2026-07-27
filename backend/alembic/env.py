@@ -20,6 +20,14 @@ from app.db.base import Base
 from app.modules.users.models import User, RefreshToken  # noqa: F401
 from app.modules.schools.models import School  # noqa: F401
 from app.modules.groups.models import Group, GroupMember  # noqa: F401
+from app.modules.courses.models import Course  # noqa: F401
+from app.modules.assignments.models import Assignment  # noqa: F401
+from app.modules.homeworks.models import Homework  # noqa: F401
+from app.modules.videos.models import Video  # noqa: F401
+from app.modules.notifications.models import Notification  # noqa: F401
+from app.modules.payments.models import Payment  # noqa: F401
+from app.modules.crm.models import Lead  # noqa: F401
+
 
 config = context.config
 if config.config_file_name is not None:
