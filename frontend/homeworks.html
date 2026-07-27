@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Uy Vazifalari — Mentor LMS + AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div><div class="brand-info"><h2>Mentor LMS <span class="badge-ai">AI</span></h2><p>O'quv platformasi</p></div></div>
+      <nav class="nav-menu">
+        <div class="nav-section-label">ASOSIY</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="/schools" class="nav-item"><i class="fa-solid fa-school"></i><span>Maktablar</span></a>
+        <a href="/groups" class="nav-item"><i class="fa-solid fa-users-rectangle"></i><span>Guruhlar</span></a>
+        <a href="/users" class="nav-item"><i class="fa-solid fa-user-gear"></i><span>Foydalanuvchilar</span></a>
+
+        <div class="nav-section-label">O'QUV JARAYONI</div>
+        <a href="/courses" class="nav-item"><i class="fa-solid fa-book-open"></i><span>Kurslar</span></a>
+        <a href="/assignments" class="nav-item"><i class="fa-solid fa-list-check"></i><span>Vazifalar</span></a>
+        <a href="/homeworks" class="nav-item active"><i class="fa-solid fa-file-pen"></i><span>Uy Vazifalari</span></a>
+        <a href="/videos" class="nav-item"><i class="fa-solid fa-circle-play"></i><span>Video Darslar</span></a>
+
+        <div class="nav-section-label">SUN'IY INTELLEKT</div>
+        <a href="/ai" class="nav-item nav-ai-highlight"><i class="fa-solid fa-robot"></i><span>AI Baholash & Tahlil</span><span class="glow-dot"></span></a>
+
+        <div class="nav-section-label">BOSHQARUV & XIZMATLAR</div>
+        <a href="/notifications" class="nav-item"><i class="fa-solid fa-bell"></i><span>Xabarnomalar</span></a>
+        <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>To'lovlar & Obuna</span></a>
+        <a href="/crm" class="nav-item"><i class="fa-solid fa-bullhorn"></i><span>CRM & Lidlar</span></a>
+      </nav>
+      <div class="sidebar-user"><div class="user-avatar">M</div><div class="user-details"><span class="user-name">O'qituvchi</span><span class="user-role">Teacher / Admin</span></div><a href="/auth" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title-group"><h1>Uy Vazifalari (Submissions)</h1><p>API Endpoint: GET /homeworks/</p></div>
+        <div class="topbar-actions"><a href="http://localhost:8000/docs#/homeworks" target="_blank" class="btn-secondary"><i class="fa-solid fa-code"></i> API Docs</a></div>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-file-pen"></i> Topshirilgan Uy Vazifalari</h2>
+            <button class="btn-primary" onclick="alert('Yangi javob yuborish (POST /homeworks/)')"><i class="fa-solid fa-upload"></i> Javob Yuborish</button>
+          </div>
+          <div class="card-body">
+            <table class="custom-table">
+              <thead>
+                <tr><th>O'quvchi</th><th>Vazifa Nomi</th><th>Fayl</th><th>Holat</th><th>Baho</th><th>AI Tekshiruv</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Shaxzod Karimov</td>
+                  <td>Kvadratik Tenglamalar Ishlash</td>
+                  <td><a href="#" class="file-link" style="color: var(--accent-primary);"><i class="fa-solid fa-image"></i> homework_v4.jpg</a></td>
+                  <td><span class="status-tag pending">TEKSHIRILMOQDA</span></td>
+                  <td>-- / 100</td>
+                  <td><a href="/ai" class="btn-ai-sm"><i class="fa-solid fa-robot"></i> AI bilan Baholash</a></td>
+                </tr>
+                <tr>
+                  <td>Malika Rahimova</td>
+                  <td>Diskriminant va Ildizlar</td>
+                  <td><a href="#" class="file-link" style="color: var(--accent-primary);"><i class="fa-solid fa-file-pdf"></i> solution_m.pdf</a></td>
+                  <td><span class="status-tag active">BAHOLANDI</span></td>
+                  <td><strong>95 / 100</strong></td>
+                  <td><a href="/ai" class="btn-secondary btn-sm"><i class="fa-solid fa-circle-check"></i> Hisobotni ko'rish</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

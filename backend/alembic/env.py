@@ -3,7 +3,12 @@ Alembic async env.py — reads DATABASE_URL from app settings.
 """
 
 import asyncio
+import os
+import sys
 from logging.config import fileConfig
+
+# Ensure app package is in python path
+sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), "..")))
 
 from alembic import context
 from sqlalchemy.ext.asyncio import create_async_engine

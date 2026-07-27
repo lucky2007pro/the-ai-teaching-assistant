@@ -9,6 +9,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.core.exceptions import register_exception_handlers
+
+# ── Exception Handlers ────────────────────────────────────────────────────────
+
 
 
 @asynccontextmanager
@@ -29,6 +33,9 @@ app = FastAPI(
     redoc_url="/redoc",
     lifespan=lifespan,
 )
+
+register_exception_handlers(app)
+
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
 app.add_middleware(
@@ -71,3 +78,42 @@ app.include_router(crm_router)
 @app.get("/health", tags=["system"])
 async def health_check():
     return {"status": "ok", "app": settings.APP_NAME}
+
+
+# ── Clean URL Frontend Page Handlers ──────────────────────────────────────────
+import os
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+frontend_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
+
+if os.path.exists(frontend_dir):
+    page_routes = [
+        ("/", "index.html"),
+        ("/auth", "auth.html"),
+        ("/schools", "schools.html"),
+        ("/groups", "groups.html"),
+        ("/users", "users.html"),
+        ("/courses", "courses.html"),
+        ("/assignments", "assignments.html"),
+        ("/homeworks", "homeworks.html"),
+        ("/videos", "videos.html"),
+        ("/ai", "ai.html"),
+        ("/notifications", "notifications.html"),
+        ("/payments", "payments.html"),
+        ("/crm", "crm.html"),
+    ]
+
+    def create_page_handler(filename: str):
+        async def page_handler():
+            return FileResponse(os.path.join(frontend_dir, filename))
+        return page_handler
+
+    for path, filename in page_routes:
+        app.add_api_route(path, create_page_handler(filename), methods=["GET"], include_in_schema=False)
+
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+
+
+
+

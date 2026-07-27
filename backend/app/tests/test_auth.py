@@ -1,5 +1,5 @@
 """
-Auth module tests — register, login, refresh, me.
+Auth module tests — register, login, refresh, logout, me.
 """
 
 import pytest
@@ -28,7 +28,6 @@ class TestAuthRegister:
         assert "id" in data
 
     async def test_register_duplicate_email(self, client: AsyncClient):
-        # First registration
         await client.post(
             "/auth/register",
             json={
@@ -37,7 +36,6 @@ class TestAuthRegister:
                 "full_name": "User One",
             },
         )
-        # Second registration with same email
         response = await client.post(
             "/auth/register",
             json={
@@ -54,7 +52,6 @@ class TestAuthLogin:
     """Test login and token flow."""
 
     async def test_login_success(self, client: AsyncClient):
-        # Register first
         await client.post(
             "/auth/register",
             json={
@@ -63,7 +60,6 @@ class TestAuthLogin:
                 "full_name": "Login User",
             },
         )
-        # Login
         response = await client.post(
             "/auth/login",
             json={"email": "login@example.com", "password": "secret123"},
@@ -91,11 +87,56 @@ class TestAuthLogin:
 
 
 @pytest.mark.asyncio
+class TestAuthRefreshAndLogout:
+    """Test token refresh and logout."""
+
+    async def test_refresh_and_logout_flow(self, client: AsyncClient):
+        # 1. Register & Login
+        await client.post(
+            "/auth/register",
+            json={
+                "email": "flow@example.com",
+                "password": "secret123",
+                "full_name": "Flow User",
+            },
+        )
+        login_resp = await client.post(
+            "/auth/login",
+            json={"email": "flow@example.com", "password": "secret123"},
+        )
+        refresh_token = login_resp.json()["refresh_token"]
+
+        # 2. Refresh token
+        refresh_resp = await client.post(
+            "/auth/refresh",
+            json={"refresh_token": refresh_token},
+        )
+        assert refresh_resp.status_code == 200
+        new_tokens = refresh_resp.json()
+        assert "access_token" in new_tokens
+        assert "refresh_token" in new_tokens
+
+        # 3. Logout using new refresh token
+        logout_resp = await client.post(
+            "/auth/logout",
+            json={"refresh_token": new_tokens["refresh_token"]},
+        )
+        assert logout_resp.status_code == 200
+        assert "muvaffaqiyatli" in logout_resp.json()["message"]
+
+        # 4. Try refresh again after logout -> should fail (401)
+        fail_refresh = await client.post(
+            "/auth/refresh",
+            json={"refresh_token": new_tokens["refresh_token"]},
+        )
+        assert fail_refresh.status_code == 401
+
+
+@pytest.mark.asyncio
 class TestAuthMe:
     """Test /auth/me endpoint."""
 
     async def test_get_me(self, client: AsyncClient):
-        # Register
         await client.post(
             "/auth/register",
             json={
@@ -104,14 +145,12 @@ class TestAuthMe:
                 "full_name": "Me User",
             },
         )
-        # Login
         login_resp = await client.post(
             "/auth/login",
             json={"email": "me@example.com", "password": "secret123"},
         )
         token = login_resp.json()["access_token"]
 
-        # Get me
         response = await client.get(
             "/auth/me",
             headers={"Authorization": f"Bearer {token}"},

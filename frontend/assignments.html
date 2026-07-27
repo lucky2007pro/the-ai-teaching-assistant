@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Vazifalar — Mentor LMS + AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div><div class="brand-info"><h2>Mentor LMS <span class="badge-ai">AI</span></h2><p>O'quv platformasi</p></div></div>
+      <nav class="nav-menu">
+        <div class="nav-section-label">ASOSIY</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="/schools" class="nav-item"><i class="fa-solid fa-school"></i><span>Maktablar</span></a>
+        <a href="/groups" class="nav-item"><i class="fa-solid fa-users-rectangle"></i><span>Guruhlar</span></a>
+        <a href="/users" class="nav-item"><i class="fa-solid fa-user-gear"></i><span>Foydalanuvchilar</span></a>
+
+        <div class="nav-section-label">O'QUV JARAYONI</div>
+        <a href="/courses" class="nav-item"><i class="fa-solid fa-book-open"></i><span>Kurslar</span></a>
+        <a href="/assignments" class="nav-item active"><i class="fa-solid fa-list-check"></i><span>Vazifalar</span></a>
+        <a href="/homeworks" class="nav-item"><i class="fa-solid fa-file-pen"></i><span>Uy Vazifalari</span></a>
+        <a href="/videos" class="nav-item"><i class="fa-solid fa-circle-play"></i><span>Video Darslar</span></a>
+
+        <div class="nav-section-label">SUN'IY INTELLEKT</div>
+        <a href="/ai" class="nav-item nav-ai-highlight"><i class="fa-solid fa-robot"></i><span>AI Baholash & Tahlil</span><span class="glow-dot"></span></a>
+
+        <div class="nav-section-label">BOSHQARUV & XIZMATLAR</div>
+        <a href="/notifications" class="nav-item"><i class="fa-solid fa-bell"></i><span>Xabarnomalar</span></a>
+        <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>To'lovlar & Obuna</span></a>
+        <a href="/crm" class="nav-item"><i class="fa-solid fa-bullhorn"></i><span>CRM & Lidlar</span></a>
+      </nav>
+      <div class="sidebar-user"><div class="user-avatar">M</div><div class="user-details"><span class="user-name">O'qituvchi</span><span class="user-role">Teacher / Admin</span></div><a href="/auth" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title-group"><h1>Vazifalar (Assignments)</h1><p>API Endpoint: GET /assignments/</p></div>
+        <div class="topbar-actions"><a href="http://localhost:8000/docs#/assignments" target="_blank" class="btn-secondary"><i class="fa-solid fa-code"></i> API Docs</a></div>
+      </header>
+
+      <div class="content-body">
+        <div class="card-action-header">
+          <div><h2><i class="fa-solid fa-list-check"></i> Topshiriq Shablonlari</h2><p>O'qituvchilar tomonidan guruh uchun e'lon qilingan vazifalar</p></div>
+          <button class="btn-primary" onclick="alert('Yangi vazifa yaratish (POST /assignments/)')"><i class="fa-solid fa-plus"></i> Yangi Vazifa Berish</button>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="assignment-item" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color);">
+              <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="assignment-icon" style="font-size: 24px; color: var(--accent-primary);"><i class="fa-solid fa-pen-ruler"></i></div>
+                <div>
+                  <h4>Vazifa #4: Kvadratik Tenglamalar Ishlash</h4>
+                  <p style="color: var(--text-muted); font-size: 13px;">Darslikdagi 14-bobo, 15-25 mashqlarni bajarib rasmini yuboring.</p>
+                  <div class="assignment-meta" style="font-size: 12px; color: var(--text-dark); margin-top: 4px; display: flex; gap: 12px;">
+                    <span><i class="fa-solid fa-star"></i> Max ball: 100</span>
+                    <span><i class="fa-solid fa-clock"></i> Muddat: 2026-07-30</span>
+                  </div>
+                </div>
+              </div>
+              <a href="/homeworks" class="btn-secondary"><i class="fa-solid fa-paper-plane"></i> Javoblarni Ko'rish</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

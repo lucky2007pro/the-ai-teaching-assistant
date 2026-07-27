@@ -1,13 +1,15 @@
 """
-Root db.py — delegates to backend/db.py
+Mentor LMS + AI — Database Connection & Async Session Entrypoint
+Exposes SQLAlchemy Base, Engine, async_session_factory, and get_db dependency.
 """
 
 import sys
 from pathlib import Path
 
-backend_dir = Path(__file__).resolve().parent / "backend"
-if str(backend_dir) not in sys.path:
-    sys.path.insert(0, str(backend_dir))
+# Ensure backend directory is in sys.path
+backend_path = Path(__file__).resolve().parent
+if str(backend_path) not in sys.path:
+    sys.path.insert(0, str(backend_path))
 
 from app.db.base import Base
 from app.db.mixins import SoftDeleteMixin, TimestampMixin

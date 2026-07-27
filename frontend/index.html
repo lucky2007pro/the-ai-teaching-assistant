@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Mentor LMS + AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-info">
+          <h2>Mentor LMS <span class="badge-ai">AI</span></h2>
+          <p>O'quv platformasi</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-label">ASOSIY</div>
+        <a href="/" class="nav-item active"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="/schools" class="nav-item"><i class="fa-solid fa-school"></i><span>Maktablar</span><span class="nav-badge">Multi-tenant</span></a>
+        <a href="/groups" class="nav-item"><i class="fa-solid fa-users-rectangle"></i><span>Guruhlar</span></a>
+        <a href="/users" class="nav-item"><i class="fa-solid fa-user-gear"></i><span>Foydalanuvchilar</span></a>
+
+        <div class="nav-section-label">O'QUV JARAYONI</div>
+        <a href="/courses" class="nav-item"><i class="fa-solid fa-book-open"></i><span>Kurslar</span></a>
+        <a href="/assignments" class="nav-item"><i class="fa-solid fa-list-check"></i><span>Vazifalar</span></a>
+        <a href="/homeworks" class="nav-item"><i class="fa-solid fa-file-pen"></i><span>Uy Vazifalari</span></a>
+        <a href="/videos" class="nav-item"><i class="fa-solid fa-circle-play"></i><span>Video Darslar</span></a>
+
+        <div class="nav-section-label">SUN'IY INTELLEKT</div>
+        <a href="/ai" class="nav-item nav-ai-highlight"><i class="fa-solid fa-robot"></i><span>AI Baholash & Tahlil</span><span class="glow-dot"></span></a>
+
+        <div class="nav-section-label">BOSHQARUV & XIZMATLAR</div>
+        <a href="/notifications" class="nav-item"><i class="fa-solid fa-bell"></i><span>Xabarnomalar</span><span class="count-badge">3</span></a>
+        <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>To'lovlar & Obuna</span></a>
+        <a href="/crm" class="nav-item"><i class="fa-solid fa-bullhorn"></i><span>CRM & Lidlar</span></a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar">M</div>
+        <div class="user-details">
+          <span class="user-name">O'qituvchi</span>
+          <span class="user-role">Teacher / Admin</span>
+        </div>
+        <a href="/auth" class="btn-logout" title="Login / Register"><i class="fa-solid fa-right-from-bracket"></i></a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title-group">
+          <h1>Dashboard</h1>
+          <p>Mentor LMS va AI tizimining umumiy statistikasi</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="server-status-badge success" id="backend-status">
+            <span class="status-dot"></span><span>API Online: <code>:8000</code></span>
+          </div>
+          <a href="http://localhost:8000/docs" target="_blank" class="btn-secondary"><i class="fa-solid fa-code"></i> Swagger API</a>
+          <a href="/auth" class="btn-primary"><i class="fa-solid fa-user-lock"></i> Auth (JWT)</a>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="stats-grid">
+          <div class="stat-card blue">
+            <div class="stat-icon"><i class="fa-solid fa-school"></i></div>
+            <div class="stat-info"><h3>Maktablar</h3><div class="stat-value">12</div><p class="stat-desc">Multi-tenant faol maktablar</p></div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info"><h3>Guruhlar</h3><div class="stat-value">48</div><p class="stat-desc">Aktiv o'quv guruhlari</p></div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="stat-info"><h3>O'quvchilar</h3><div class="stat-value">1,240</div><p class="stat-desc">Ro'yxatdan o'tganlar</p></div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="stat-info"><h3>AI Tekshiruvlar</h3><div class="stat-value">3,890</div><p class="stat-desc">Avtomatik baholangan</p></div>
+          </div>
+        </div>
+
+        <div class="card margin-top">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-cubes"></i> Tizim Modullari va Routerning Holati</h2>
+            <span class="badge">12 Ta Modul Yaratilgan</span>
+          </div>
+          <div class="card-body">
+            <div class="modules-grid">
+              <a href="/auth" class="module-card"><div class="m-icon"><i class="fa-solid fa-lock"></i></div><h4>app/modules/auth</h4><p>JWT Login, Register, Refresh Token</p><span class="tag tag-success">GET/POST /auth/*</span></a>
+              <a href="/users" class="module-card"><div class="m-icon"><i class="fa-solid fa-users"></i></div><h4>app/modules/users</h4><p>Admin va Teacher profillari</p><span class="tag tag-success">GET/PATCH /users/*</span></a>
+              <a href="/schools" class="module-card"><div class="m-icon"><i class="fa-solid fa-school"></i></div><h4>app/modules/schools</h4><p>Multi-tenant maktablar</p><span class="tag tag-success">CRUD /schools/*</span></a>
+              <a href="/groups" class="module-card"><div class="m-icon"><i class="fa-solid fa-users-rectangle"></i></div><h4>app/modules/groups</h4><p>Guruh yaratish va a'zolar</p><span class="tag tag-success">CRUD /groups/*</span></a>
+              <a href="/courses" class="module-card"><div class="m-icon"><i class="fa-solid fa-book"></i></div><h4>app/modules/courses</h4><p>Kurslar va fan tuzilmasi</p><span class="tag tag-info">GET/POST /courses/*</span></a>
+              <a href="/assignments" class="module-card"><div class="m-icon"><i class="fa-solid fa-tasks"></i></div><h4>app/modules/assignments</h4><p>Vazifa topshiriq shablonlari</p><span class="tag tag-info">GET/POST /assignments/*</span></a>
+              <a href="/homeworks" class="module-card"><div class="m-icon"><i class="fa-solid fa-file-lines"></i></div><h4>app/modules/homeworks</h4><p>O'quvchi topshiriq javoblari</p><span class="tag tag-info">GET/POST /homeworks/*</span></a>
+              <a href="/videos" class="module-card"><div class="m-icon"><i class="fa-solid fa-video"></i></div><h4>app/modules/videos</h4><p>Video darslar saqlash</p><span class="tag tag-info">GET/POST /videos/*</span></a>
+              <a href="/ai" class="module-card highlight"><div class="m-icon"><i class="fa-solid fa-brain"></i></div><h4>app/modules/ai</h4><p>Vision API avtomatik baholash</p><span class="tag tag-ai">POST /ai/grade</span></a>
+              <a href="/notifications" class="module-card"><div class="m-icon"><i class="fa-solid fa-bell"></i></div><h4>app/modules/notifications</h4><p>Xabarnomalar servisi</p><span class="tag tag-warning">GET /notifications/*</span></a>
+              <a href="/payments" class="module-card"><div class="m-icon"><i class="fa-solid fa-wallet"></i></div><h4>app/modules/payments</h4><p>Obuna va to'lovlar</p><span class="tag tag-warning">GET/POST /payments/*</span></a>
+              <a href="/crm" class="module-card"><div class="m-icon"><i class="fa-solid fa-chart-line"></i></div><h4>app/modules/crm</h4><p>Marketing va lidlar</p><span class="tag tag-warning">GET/POST /crm/*</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

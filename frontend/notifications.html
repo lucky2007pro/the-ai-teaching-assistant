@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Xabarnomalar — Mentor LMS + AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div><div class="brand-info"><h2>Mentor LMS <span class="badge-ai">AI</span></h2><p>O'quv platformasi</p></div></div>
+      <nav class="nav-menu">
+        <div class="nav-section-label">ASOSIY</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="/schools" class="nav-item"><i class="fa-solid fa-school"></i><span>Maktablar</span></a>
+        <a href="/groups" class="nav-item"><i class="fa-solid fa-users-rectangle"></i><span>Guruhlar</span></a>
+        <a href="/users" class="nav-item"><i class="fa-solid fa-user-gear"></i><span>Foydalanuvchilar</span></a>
+
+        <div class="nav-section-label">O'QUV JARAYONI</div>
+        <a href="/courses" class="nav-item"><i class="fa-solid fa-book-open"></i><span>Kurslar</span></a>
+        <a href="/assignments" class="nav-item"><i class="fa-solid fa-list-check"></i><span>Vazifalar</span></a>
+        <a href="/homeworks" class="nav-item"><i class="fa-solid fa-file-pen"></i><span>Uy Vazifalari</span></a>
+        <a href="/videos" class="nav-item"><i class="fa-solid fa-circle-play"></i><span>Video Darslar</span></a>
+
+        <div class="nav-section-label">SUN'IY INTELLEKT</div>
+        <a href="/ai" class="nav-item nav-ai-highlight"><i class="fa-solid fa-robot"></i><span>AI Baholash & Tahlil</span><span class="glow-dot"></span></a>
+
+        <div class="nav-section-label">BOSHQARUV & XIZMATLAR</div>
+        <a href="/notifications" class="nav-item active"><i class="fa-solid fa-bell"></i><span>Xabarnomalar</span><span class="count-badge">3</span></a>
+        <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>To'lovlar & Obuna</span></a>
+        <a href="/crm" class="nav-item"><i class="fa-solid fa-bullhorn"></i><span>CRM & Lidlar</span></a>
+      </nav>
+      <div class="sidebar-user"><div class="user-avatar">M</div><div class="user-details"><span class="user-name">O'qituvchi</span><span class="user-role">Teacher / Admin</span></div><a href="/auth" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title-group"><h1>Xabarnomalar (Notifications)</h1><p>API Endpoint: GET /notifications/</p></div>
+        <div class="topbar-actions"><a href="http://localhost:8000/docs#/notifications" target="_blank" class="btn-secondary"><i class="fa-solid fa-code"></i> API Docs</a></div>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header"><h2><i class="fa-solid fa-bell"></i> Bildirishnomalar Ro'yxati</h2></div>
+          <div class="card-body">
+            <div class="notification-list" style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="notif-item unread" style="display: flex; gap: 14px; padding: 16px; background: rgba(236,72,153,0.08); border: 1px solid rgba(236,72,153,0.2); border-radius: var(--radius-md);">
+                <div class="notif-icon ai" style="font-size: 24px; color: #f472b6;"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                  <h4>AI Tekshiruv Yakunlandi</h4>
+                  <p style="color: var(--text-muted); font-size: 13px;">8-A sinfi o'quvchisi Shaxzodning vazifasi avtomatik 88 ballga baholandi.</p>
+                  <small style="color: var(--text-dark); font-size: 11px;">10 daqiqa oldin</small>
+                </div>
+              </div>
+              <div class="notif-item" style="display: flex; gap: 14px; padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                <div class="notif-icon user" style="font-size: 24px; color: var(--accent-primary);"><i class="fa-solid fa-user-plus"></i></div>
+                <div>
+                  <h4>Yangi O'quvchi Qo'shildi</h4>
+                  <p style="color: var(--text-muted); font-size: 13px;">Aziz Rahimov "Algebra 8-A" guruhiga a'zo bo'ldi.</p>
+                  <small style="color: var(--text-dark); font-size: 11px;">1 soat oldin</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

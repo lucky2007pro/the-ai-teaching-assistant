@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Darslar — Mentor LMS + AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div><div class="brand-info"><h2>Mentor LMS <span class="badge-ai">AI</span></h2><p>O'quv platformasi</p></div></div>
+      <nav class="nav-menu">
+        <div class="nav-section-label">ASOSIY</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="/schools" class="nav-item"><i class="fa-solid fa-school"></i><span>Maktablar</span></a>
+        <a href="/groups" class="nav-item"><i class="fa-solid fa-users-rectangle"></i><span>Guruhlar</span></a>
+        <a href="/users" class="nav-item"><i class="fa-solid fa-user-gear"></i><span>Foydalanuvchilar</span></a>
+
+        <div class="nav-section-label">O'QUV JARAYONI</div>
+        <a href="/courses" class="nav-item"><i class="fa-solid fa-book-open"></i><span>Kurslar</span></a>
+        <a href="/assignments" class="nav-item"><i class="fa-solid fa-list-check"></i><span>Vazifalar</span></a>
+        <a href="/homeworks" class="nav-item"><i class="fa-solid fa-file-pen"></i><span>Uy Vazifalari</span></a>
+        <a href="/videos" class="nav-item active"><i class="fa-solid fa-circle-play"></i><span>Video Darslar</span></a>
+
+        <div class="nav-section-label">SUN'IY INTELLEKT</div>
+        <a href="/ai" class="nav-item nav-ai-highlight"><i class="fa-solid fa-robot"></i><span>AI Baholash & Tahlil</span><span class="glow-dot"></span></a>
+
+        <div class="nav-section-label">BOSHQARUV & XIZMATLAR</div>
+        <a href="/notifications" class="nav-item"><i class="fa-solid fa-bell"></i><span>Xabarnomalar</span></a>
+        <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>To'lovlar & Obuna</span></a>
+        <a href="/crm" class="nav-item"><i class="fa-solid fa-bullhorn"></i><span>CRM & Lidlar</span></a>
+      </nav>
+      <div class="sidebar-user"><div class="user-avatar">M</div><div class="user-details"><span class="user-name">O'qituvchi</span><span class="user-role">Teacher / Admin</span></div><a href="/auth" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title-group"><h1>Video Darslar (Videos)</h1><p>API Endpoint: GET /videos/</p></div>
+        <div class="topbar-actions"><a href="http://localhost:8000/docs#/videos" target="_blank" class="btn-secondary"><i class="fa-solid fa-code"></i> API Docs</a></div>
+      </header>
+
+      <div class="content-body">
+        <div class="card-action-header">
+          <div><h2><i class="fa-solid fa-video"></i> Video Darslar Kutubxonasi</h2><p>Kurslar bo'yicha yuklangan kontentlar</p></div>
+          <button class="btn-primary" onclick="alert('Video yuklash (POST /videos/)')"><i class="fa-solid fa-upload"></i> Video Yuklash</button>
+        </div>
+
+        <div class="grid-3">
+          <div class="card video-card">
+            <div class="video-preview" style="height: 160px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; position: relative;">
+              <i class="fa-solid fa-play-circle" style="font-size: 48px; color: var(--accent-primary);"></i>
+              <span class="video-duration" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 2px 6px; font-size: 11px; border-radius: 4px;">14:20</span>
+            </div>
+            <div class="video-info" style="padding: 16px;">
+              <h4>1-Dars: Tenglamalar Sistemasi Kirish</h4>
+              <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">O'qituvchi: Jasur Alimov</p>
+            </div>
+          </div>
+
+          <div class="card video-card">
+            <div class="video-preview" style="height: 160px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; position: relative;">
+              <i class="fa-solid fa-play-circle" style="font-size: 48px; color: var(--accent-primary);"></i>
+              <span class="video-duration" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 2px 6px; font-size: 11px; border-radius: 4px;">22:05</span>
+            </div>
+            <div class="video-info" style="padding: 16px;">
+              <h4>2-Dars: Vieta Formulasi va Amaliyot</h4>
+              <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">O'qituvchi: Jasur Alimov</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

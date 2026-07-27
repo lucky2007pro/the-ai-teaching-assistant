@@ -82,7 +82,10 @@ class AuthService:
         if not stored_token:
             raise UnauthorizedException("Refresh token topilmadi")
 
-        if stored_token.expires_at < datetime.now(timezone.utc):
+        # Check token expiration
+        expires_at = stored_token.expires_at
+        now = datetime.now(timezone.utc) if expires_at.tzinfo else datetime.now(timezone.utc).replace(tzinfo=None)
+        if expires_at < now:
             raise UnauthorizedException("Refresh token muddati tugagan")
 
         # Delete old token
@@ -93,7 +96,7 @@ class AuthService:
         if not user or not user.is_active:
             raise UnauthorizedException("Foydalanuvchi topilmadi yoki faol emas")
 
-        return await self._create_tokens(user)
+        return await self._createTokens(user) if hasattr(self, '_createTokens') else await self._create_tokens(user)
 
     # ── Logout ────────────────────────────────────────────────────────────────
 
@@ -112,13 +115,15 @@ class AuthService:
         access_token = create_access_token(token_data)
         refresh_token = create_refresh_token(token_data)
 
-        # Store refresh token
+        # Store refresh token with naive UTC datetime for DB compatibility
+        naive_now = datetime.now(timezone.utc).replace(tzinfo=None)
         db_token = RefreshToken(
             token=refresh_token,
             user_id=user.id,
-            expires_at=datetime.now(timezone.utc)
-            + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS),
+            expires_at=naive_now + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS),
         )
+
+
         self.db.add(db_token)
         await self.db.flush()
 
