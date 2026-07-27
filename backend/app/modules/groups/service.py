@@ -85,7 +85,7 @@ class GroupService:
         from app.core.security import hash_password
         
         # Check uniqueness of username
-        existing_username = await self.repo.session.execute(select(User.id).where(User.username == data.username))
+        existing_username = await self.repo.db.execute(select(User.id).where(User.username == data.username))
         if existing_username.scalar_one_or_none():
             raise ConflictException("Bu username allaqachon band")
             
@@ -99,8 +99,8 @@ class GroupService:
             is_active=True,
             school_id=group.school_id
         )
-        self.repo.session.add(new_student)
-        await self.repo.session.flush()
+        self.repo.db.add(new_student)
+        await self.repo.db.flush()
         
         # Add member to group
         return await self.repo.add_member(group_id, new_student.id)

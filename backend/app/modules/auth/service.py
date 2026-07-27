@@ -64,6 +64,10 @@ class AuthService:
         global verification_codes
         verification_codes[user.email] = verification_code
         
+        print(f"\n\n====================================")
+        print(f"VERIFICATION CODE FOR {user.email}: {verification_code}")
+        print(f"====================================\n\n")
+        
         # Await the email sending to ensure it's sent
         await send_verification_email(user.email, verification_code)
         
