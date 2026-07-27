@@ -43,26 +43,25 @@ class AuthService:
         if existing.scalar_one_or_none():
             raise ConflictException("Bu email allaqachon ro'yxatdan o'tgan")
 
+        import random
+        verification_code = str(random.randint(100000, 999999))
+        expires_at = datetime.now(timezone.utc) + timedelta(minutes=10)
+        naive_expires = expires_at.replace(tzinfo=None)
+
         user = User(
             email=data.email,
             hashed_password=hash_password(data.password),
             full_name=data.full_name,
             role="teacher",
             phone=data.phone,
-            is_active=False  # Require verification
+            is_active=False,  # Require verification
+            verification_code=verification_code,
+            verification_code_expires_at=naive_expires
         )
         self.db.add(user)
         await self.db.flush()
         
-        # Generate 6-digit code
-        import random
         from app.modules.services.email_service import send_verification_email
-        
-        verification_code = str(random.randint(100000, 999999))
-        
-        # Store code in memory for testing
-        global verification_codes
-        verification_codes[user.email] = verification_code
         
         print(f"\n\n====================================")
         print(f"VERIFICATION CODE FOR {user.email}: {verification_code}")
@@ -74,20 +73,22 @@ class AuthService:
         return user
 
     async def verify_email(self, email: str, code: str):
-        global verification_codes
-        if verification_codes.get(email) != code:
-            raise BadRequestException("Kod noto'g'ri yoki eskirgan")
-            
         result = await self.db.execute(select(User).where(User.email == email))
         user = result.scalar_one_or_none()
         if not user:
             raise BadRequestException("Foydalanuvchi topilmadi")
             
+        if user.verification_code != code:
+            raise BadRequestException("Kod noto'g'ri")
+            
+        naive_now = datetime.now(timezone.utc).replace(tzinfo=None)
+        if user.verification_code_expires_at and user.verification_code_expires_at < naive_now:
+            raise BadRequestException("Kod eskirgan")
+            
         user.is_active = True
+        user.verification_code = None
+        user.verification_code_expires_at = None
         await self.db.flush()
-        
-        # Remove used code
-        del verification_codes[email]
         
         return {"message": "Email muvaffaqiyatli tasdiqlandi"}
 
