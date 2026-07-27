@@ -74,6 +74,37 @@ class GroupService:
 
         return await self.repo.add_member(group_id, user_id)
 
+    async def create_and_add_student(
+        self, group_id: uuid.UUID, data: "StudentCreate", current_user: User
+    ) -> GroupMember:
+        group = await self.get_group(group_id)
+        if group.teacher_id != current_user.id and current_user.role != "admin":
+            raise ForbiddenException("Faqat guruh egasi yoki admin o'quvchi qo'sha oladi")
+            
+        from sqlalchemy import select
+        from app.core.security import hash_password
+        
+        # Check uniqueness of username
+        existing_username = await self.repo.db.execute(select(User.id).where(User.username == data.username))
+        if existing_username.scalar_one_or_none():
+            raise ConflictException("Bu username allaqachon band")
+            
+        # Create user
+        new_student = User(
+            username=data.username,
+            full_name=data.full_name,
+            hashed_password=hash_password(data.password),
+            role="student",
+            phone=data.phone,
+            is_active=True,
+            school_id=group.school_id
+        )
+        self.repo.db.add(new_student)
+        await self.repo.db.flush()
+        
+        # Add member to group
+        return await self.repo.add_member(group_id, new_student.id)
+
     async def remove_member(
         self, group_id: uuid.UUID, user_id: uuid.UUID, current_user: User
     ) -> None:

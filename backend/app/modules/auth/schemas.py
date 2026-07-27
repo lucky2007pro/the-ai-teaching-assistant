@@ -11,14 +11,19 @@ class RegisterRequest(BaseModel):
     email: EmailStr
     password: str = Field(..., min_length=6, max_length=128)
     full_name: str = Field(..., min_length=2, max_length=255)
-    role: str = Field("student", pattern=r"^(admin|teacher|student)$")
     phone: str | None = Field(None, max_length=20)
 
 
-class LoginRequest(BaseModel):
-    """Email + password login."""
-
+class VerifyEmailRequest(BaseModel):
+    """Verification code request."""
     email: EmailStr
+    code: str = Field(..., min_length=6, max_length=6)
+
+
+class LoginRequest(BaseModel):
+    """Email or username + password login."""
+
+    login: str = Field(..., description="Email or Username")
     password: str
 
 

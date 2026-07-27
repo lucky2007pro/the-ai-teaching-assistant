@@ -17,13 +17,13 @@ from app.db.init_db import seed_default_user
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Startup / shutdown events."""
-    print(f"🚀 {settings.APP_NAME} is starting (env={settings.ENVIRONMENT}) ...")
+    print(f"[*] {settings.APP_NAME} is starting (env={settings.ENVIRONMENT}) ...")
     try:
         await seed_default_user()
     except Exception as e:
-        print(f"⚠️ Error seeding default user: {e}")
+        print(f"[!] Error seeding default user: {e}")
     yield
-    print(f"🛑 {settings.APP_NAME} is shutting down ...")
+    print(f"[*] {settings.APP_NAME} is shutting down ...")
 
 
 app = FastAPI(

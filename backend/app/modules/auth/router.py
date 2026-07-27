@@ -13,6 +13,7 @@ from app.modules.auth.schemas import (
     RefreshRequest,
     RegisterRequest,
     TokenResponse,
+    VerifyEmailRequest,
 )
 from app.modules.auth.service import AuthService
 from app.modules.users.models import User
@@ -29,11 +30,18 @@ async def register(data: RegisterRequest, db: AsyncSession = Depends(get_db)):
     return user
 
 
+@router.post("/verify-email", response_model=MessageResponse)
+async def verify_email(data: VerifyEmailRequest, db: AsyncSession = Depends(get_db)):
+    """Verify 6-digit email code."""
+    service = AuthService(db)
+    return await service.verify_email(data.email, data.code)
+
+
 @router.post("/login", response_model=TokenResponse)
 async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
     """Login and receive JWT tokens."""
     service = AuthService(db)
-    return await service.login(data.email, data.password)
+    return await service.login(data.login, data.password)
 
 
 @router.post("/refresh", response_model=TokenResponse)

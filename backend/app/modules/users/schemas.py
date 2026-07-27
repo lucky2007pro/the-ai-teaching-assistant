@@ -15,7 +15,8 @@ class UserResponse(BaseModel):
     """Public user profile response."""
 
     id: uuid.UUID
-    email: str
+    email: str | None = None
+    username: str | None = None
     full_name: str
     phone: str | None = None
     avatar_url: str | None = None

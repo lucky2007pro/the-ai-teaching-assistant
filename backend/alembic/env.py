@@ -25,8 +25,8 @@ from app.modules.assignments.models import Assignment  # noqa: F401
 from app.modules.homeworks.models import Homework  # noqa: F401
 from app.modules.videos.models import Video  # noqa: F401
 from app.modules.notifications.models import Notification  # noqa: F401
-from app.modules.payments.models import Payment  # noqa: F401
-from app.modules.crm.models import Lead  # noqa: F401
+# from app.modules.payments.models import Payment  # noqa: F401
+# from app.modules.crm.models import Lead  # noqa: F401
 
 
 config = context.config
