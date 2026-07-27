@@ -79,19 +79,6 @@ api_v1_router.include_router(crm_router)
 
 app.include_router(api_v1_router)
 
-# Also mount at root level for legacy/direct access compatibility
-app.include_router(auth_router)
-app.include_router(users_router)
-app.include_router(schools_router)
-app.include_router(groups_router)
-app.include_router(courses_router)
-app.include_router(assignments_router)
-app.include_router(homeworks_router)
-app.include_router(videos_router)
-app.include_router(ai_router)
-app.include_router(notifications_router)
-app.include_router(payments_router)
-app.include_router(crm_router)
 
 
 

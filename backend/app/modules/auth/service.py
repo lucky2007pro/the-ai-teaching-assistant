@@ -25,8 +25,6 @@ from app.modules.auth.schemas import RegisterRequest, TokenResponse
 from app.modules.users.models import RefreshToken, User
 
 
-# In-memory store for verification codes (For testing purposes)
-verification_codes = {}
 
 class AuthService:
     """Handles authentication: register, login, token refresh, logout."""
@@ -62,10 +60,6 @@ class AuthService:
         await self.db.flush()
         
         from app.modules.services.email_service import send_verification_email
-        
-        print(f"\n\n====================================")
-        print(f"VERIFICATION CODE FOR {user.email}: {verification_code}")
-        print(f"====================================\n\n")
         
         # Await the email sending to ensure it's sent
         await send_verification_email(user.email, verification_code)
@@ -139,8 +133,7 @@ class AuthService:
         user = await self.db.get(User, stored_token.user_id)
         if not user or not user.is_active:
             raise UnauthorizedException("Foydalanuvchi topilmadi yoki faol emas")
-
-        return await self._createTokens(user) if hasattr(self, '_createTokens') else await self._create_tokens(user)
+        return await self._create_tokens(user)
 
     # ── Logout ────────────────────────────────────────────────────────────────
 

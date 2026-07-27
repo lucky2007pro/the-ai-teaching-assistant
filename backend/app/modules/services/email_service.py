@@ -47,5 +47,12 @@ async def send_verification_email(to_email: str, code: str):
       </body>
     </html>
     """
+    
+    # DEV FALLBACK: Print code to console
+    logger.info("=" * 50)
+    logger.info(f"EMAIL VERIFICATION CODE FOR {to_email}")
+    logger.info(f"CODE: {code}")
+    logger.info("=" * 50)
+
     loop = asyncio.get_running_loop()
     await loop.run_in_executor(None, send_email_sync, to_email, subject, html_content)
