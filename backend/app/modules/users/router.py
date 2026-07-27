@@ -17,6 +17,13 @@ from app.modules.users.service import UserService
 router = APIRouter(prefix="/users", tags=["users"])
 
 
+@router.get("/suggest-username")
+async def suggest_username(full_name: str, db: AsyncSession = Depends(get_db)):
+    """Generate a unique username proposal based on full name."""
+    service = UserService(db)
+    return await service.suggest_username(full_name)
+
+
 @router.get("/me", response_model=UserResponse)
 async def get_my_profile(current_user: User = Depends(get_current_user)):
     """Get current authenticated user's profile."""
@@ -30,6 +37,10 @@ async def update_my_profile(
     db: AsyncSession = Depends(get_db),
 ):
     """Update current user's profile."""
+    if current_user.role == "student":
+        from app.core.exceptions import ForbiddenException
+        raise ForbiddenException("O'quvchilar o'z profilini tahrirlay olmaydi")
+        
     service = UserService(db)
     return await service.update_profile(current_user.id, data)
 

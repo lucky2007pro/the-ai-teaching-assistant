@@ -1,5 +1,5 @@
 """
-AI Grading Service — orchestrates homework grading via OpenAI Vision API.
+AI Grading Service — orchestrates homework grading via Google Gemini API.
 
 This service will be fully implemented in Bosqich 6. Current structure:
 1. Receive homework submission (image/PDF)
@@ -19,7 +19,7 @@ class GradingService:
 
     def __init__(self, db: AsyncSession):
         self.db = db
-        self.model = settings.OPENAI_MODEL
+        self.model = settings.GEMINI_MODEL
 
     async def grade_homework(self, homework_id):
         """
@@ -28,7 +28,7 @@ class GradingService:
         Steps:
         1. Fetch homework + assignment from DB
         2. Download submission file
-        3. Send to OpenAI Vision API with grading prompt
+        3. Send to Google Gemini API with grading prompt
         4. Parse structured response
         5. Create AIGradingReport
         6. Update ConceptMastery

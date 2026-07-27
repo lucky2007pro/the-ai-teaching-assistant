@@ -14,6 +14,9 @@ from app.db.mixins import TimestampMixin
 class AIGradingReport(Base, TimestampMixin):
     """Stores AI grading results for a homework submission."""
 
+
+    
+
     __tablename__ = "ai_grading_reports"
 
     homework_id: Mapped[uuid.UUID] = mapped_column(

@@ -34,15 +34,22 @@ class Settings(BaseSettings):
     # ── CORS ──────────────────────────────────────────────────────────────────
     CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5173"]
 
-    # ── AI (OpenAI) ───────────────────────────────────────────────────────────
-    OPENAI_API_KEY: str = ""
-    OPENAI_MODEL: str = "gpt-4o"
+    # ── AI (Gemini) ───────────────────────────────────────────────────────────
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-1.5-pro"
 
     # ── S3 / File Storage ─────────────────────────────────────────────────────
     S3_BUCKET_NAME: str = ""
     S3_ACCESS_KEY: str = ""
     S3_SECRET_KEY: str = ""
     S3_ENDPOINT_URL: str = ""
+
+    # ── SMTP / Email ──────────────────────────────────────────────────────────
+    SMTP_HOST: str = "smtp.gmail.com"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    FROM_EMAIL: str = "no-reply@mentor.uz"
 
 
 settings = Settings()

@@ -40,3 +40,24 @@ class UserService:
         size: int = 20,
     ) -> tuple[list[User], int]:
         return await self.repo.list_users(role=role, school_id=school_id, page=page, size=size)
+
+    async def suggest_username(self, full_name: str) -> dict:
+        import re
+        from sqlalchemy import select
+        
+        base_username = re.sub(r'[^a-z0-9_]', '', full_name.lower().replace(' ', '_'))
+        if not base_username:
+            base_username = "user"
+            
+        username = base_username
+        counter = 1
+        
+        while True:
+            # Check if exists
+            result = await self.repo.session.execute(select(User.id).where(User.username == username))
+            if not result.scalar_one_or_none():
+                break
+            username = f"{base_username}{counter}"
+            counter += 1
+            
+        return {"username": username}

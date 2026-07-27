@@ -17,7 +17,8 @@ class User(Base, TimestampMixin, SoftDeleteMixin):
 
     __tablename__ = "users"
 
-    email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
+    email: Mapped[str | None] = mapped_column(String(255), unique=True, index=True, nullable=True)
+    username: Mapped[str | None] = mapped_column(String(255), unique=True, index=True, nullable=True)
     hashed_password: Mapped[str] = mapped_column(Text, nullable=False)
     full_name: Mapped[str] = mapped_column(String(255), nullable=False)
     phone: Mapped[str | None] = mapped_column(String(20), nullable=True)

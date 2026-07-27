@@ -22,6 +22,15 @@ class GroupUpdate(BaseModel):
     is_active: bool | None = None
 
 
+class StudentCreate(BaseModel):
+    """Create a new student directly into a group."""
+    full_name: str = Field(..., min_length=2, max_length=255)
+    username: str = Field(..., min_length=3, max_length=150)
+    password: str = Field(..., min_length=6, max_length=128)
+    birth_year: int | None = None
+    phone: str | None = None
+
+
 class GroupMemberAdd(BaseModel):
     """Add a student to a group."""
     user_id: uuid.UUID

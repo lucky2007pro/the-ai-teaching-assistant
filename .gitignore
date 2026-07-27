@@ -7,9 +7,6 @@ dist/
 build/
 *.egg
 *.db
-*.sqlite
-*.sqlite3
-
 
 # Virtual env
 .venv/
@@ -19,23 +16,12 @@ env/
 # Environment
 .env
 
-# IDE
+# IDE & OS
 .idea/
 .vscode/
-*.swp
-*.swo
-
-# OS
 .DS_Store
 Thumbs.db
 
-# Testing
+# Testing & Cache
 .pytest_cache/
-htmlcov/
-.coverage
-
-# Mypy
 .mypy_cache/
-
-# Alembic
-alembic/versions/*.pyc

@@ -18,6 +18,7 @@ from app.modules.groups.schemas import (
     GroupMemberResponse,
     GroupResponse,
     GroupUpdate,
+    StudentCreate,
 )
 from app.modules.groups.service import GroupService
 from app.modules.users.models import User
@@ -90,6 +91,17 @@ async def delete_group(
 # ── Members ───────────────────────────────────────────────────────────────────
 
 
+@router.post("/{group_id}/students", response_model=GroupMemberResponse, status_code=201)
+async def add_student(
+    group_id: uuid.UUID,
+    data: StudentCreate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Create a new student and add them to the group."""
+    service = GroupService(db)
+    return await service.create_and_add_student(group_id, data, current_user)
+
 @router.post("/{group_id}/members", response_model=GroupMemberResponse, status_code=201)
 async def add_member(
     group_id: uuid.UUID,
@@ -97,7 +109,7 @@ async def add_member(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Add a student to the group."""
+    """Add an existing student to the group."""
     service = GroupService(db)
     return await service.add_member(group_id, data.user_id, current_user)
 
